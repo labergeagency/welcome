@@ -56,11 +56,17 @@
   .discount-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .discount-card { border-radius: 20px; overflow: hidden; box-shadow: 0 6px 30px rgba(0,0,0,0.1); transition: transform 0.25s, box-shadow 0.25s; }
   .discount-card:hover { transform: translateY(-8px); box-shadow: 0 16px 48px rgba(0,0,0,0.15); }
-  .dc-header { padding: 28px 28px 20px; text-align: center; }
-  .dc-header.red { background: linear-gradient(135deg, #c0392b, var(--red)); }
-  .dc-header.green { background: linear-gradient(135deg, #1b5e20, var(--green)); }
-  .dc-header.blue { background: linear-gradient(135deg, var(--navy-dark), var(--navy)); }
-  .dc-icon { font-size: 48px; margin-bottom: 12px; }
+  .dc-header { padding: 0; text-align: center; position: relative; overflow: hidden; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+  .dc-header-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.6s ease; }
+  .dc-card:hover .dc-header-bg { transform: scale(1.05); }
+  .dc-header-overlay { position: absolute; inset: 0; }
+  .dc-header.red .dc-header-overlay { background: linear-gradient(180deg, rgba(150,20,10,.45) 0%, rgba(192,57,43,.82) 60%, rgba(192,57,43,.95) 100%); }
+  .dc-header.green .dc-header-overlay { background: linear-gradient(180deg, rgba(10,60,20,.45) 0%, rgba(27,94,32,.82) 60%, rgba(27,94,32,.95) 100%); }
+  .dc-header.blue .dc-header-overlay { background: linear-gradient(180deg, rgba(0,15,50,.45) 0%, rgba(0,31,92,.82) 60%, rgba(0,31,92,.95) 100%); }
+  .dc-header-text { position: relative; z-index: 2; padding: 0 20px 20px; }
+  .dc-icon { display: none; }
+  .dc-title { font-family: "Playfair Display", serif; font-size: 1.3rem; font-weight: 800; color: var(--white); margin-bottom: 4px; }
+  .dc-subtitle { font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
   .dc-title { font-family: "Playfair Display", serif; font-size: 1.3rem; font-weight: 800; color: var(--white); margin-bottom: 4px; }
   .dc-subtitle { font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
   .dc-body { padding: 24px 28px 28px; background: var(--white); border: 1px solid var(--border); border-top: none; border-radius: 0 0 20px 20px; }
@@ -216,20 +222,26 @@
     <div class="discount-cards">
       <div class="discount-card fade-up">
         <div class="dc-header red">
-          <div class="dc-icon">&#127968;&#128663;</div>
-          <div class="dc-title">Multi-Policy Bundling</div>
-          <div class="dc-subtitle">Auto + Home Savings</div>
+          <div class="dc-header-bg" style="background-image:url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80&auto=format&fit=crop');"></div>
+          <div class="dc-header-overlay"></div>
+          <div class="dc-header-text">
+            <div class="dc-title">Multi-Policy Bundling</div>
+            <div class="dc-subtitle">Auto + Home Savings</div>
+          </div>
         </div>
         <div class="dc-body">
           <div class="dc-tagline">Save when you bundle your Auto &amp; Home policies!</div>
-          <p class="dc-desc">Combine your Auto and Home insurance with Farmers and save on both policies. Bundling can save you <strong>up to 10% or more</strong> — and reduce paperwork with one convenient bill.</p>
+          <p class="dc-desc">Combine your Auto and Home insurance with Farmers and save on both policies. Bundling can save you <strong>up to 10% or more</strong> &mdash; and reduce paperwork with one convenient bill.</p>
         </div>
       </div>
       <div class="discount-card fade-up">
         <div class="dc-header green">
-          <div class="dc-icon">&#9989;&#128179;</div>
-          <div class="dc-title">Good Payer Reward</div>
-          <div class="dc-subtitle">Auto-Pay Benefits</div>
+          <div class="dc-header-bg" style="background-image:url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80&auto=format&fit=crop');"></div>
+          <div class="dc-header-overlay"></div>
+          <div class="dc-header-text">
+            <div class="dc-title">Good Payer Reward</div>
+            <div class="dc-subtitle">Auto-Pay Benefits</div>
+          </div>
         </div>
         <div class="dc-body">
           <div class="dc-tagline">Save with a consistent payment history!</div>
@@ -238,9 +250,12 @@
       </div>
       <div class="discount-card fade-up">
         <div class="dc-header blue">
-          <div class="dc-icon">&#128187;&#128181;</div>
-          <div class="dc-title">EFT Discount</div>
-          <div class="dc-subtitle">Easy Electronic Payments</div>
+          <div class="dc-header-bg" style="background-image:url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80&auto=format&fit=crop');"></div>
+          <div class="dc-header-overlay"></div>
+          <div class="dc-header-text">
+            <div class="dc-title">EFT Discount</div>
+            <div class="dc-subtitle">Easy Electronic Payments</div>
+          </div>
         </div>
         <div class="dc-body">
           <div class="dc-tagline">Set up Electronic Fund Transfers (EFT)</div>
@@ -475,7 +490,7 @@
   <p>Our team is ready to review your current policy and apply every discount you qualify for. Give us a call or send us an email today!</p>
   <div class="cta-row">
     <a href="tel:2536612000" class="btn btn-primary">&#128222; Call (253) 661-2000</a>
-    <a href="mailto:slaberge@farmersagent.com" class="btn btn-outline">&#9993;&#65039; Email Us</a>
+    <a href="/cdn-cgi/l/email-protection#f6859a979493849193b69097849b9384859791939882d895999b" class="btn btn-outline">&#9993;&#65039; Email Us</a>
     <a href="index.html" class="btn btn-outline">&#8592; Back to Home</a>
   </div>
 </section>
@@ -488,12 +503,11 @@
   </div>
   <div class="footer-links">
     <a href="https://agents.farmers.com/wa/tacoma/stephen-la-berge" target="_blank">Farmers Profile</a>
-    <a href="mailto:slaberge@farmersagent.com">Email Us</a>
+    <a href="/cdn-cgi/l/email-protection#e7948b868582958082a78186958a8295948680828993c984888a">Email Us</a>
     <a href="tel:2536612000">Call Us</a>
   </div>
   <p>&#169; 2025 LaBerge Agency. All rights reserved.</p>
 </footer>
-
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
