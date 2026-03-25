@@ -672,7 +672,7 @@
     chatHistory.push({ role: 'user', content: text });
     lbShowTyping();
     var messages = [{ role: 'system', content: SYSTEM_PROMPT }].concat(chatHistory);
-    fetch(WORKER_URL, {
+    fetch(https://laberge-ai-new.labergeagency.workers.dev, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ messages: messages })
