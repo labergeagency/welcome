@@ -554,5 +554,186 @@
   }, {threshold: 0.08});
   document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
 </script>
+<!-- ========================================================
+     LABERGE AGENCY AI CHAT WIDGET
+     Powered by OpenAI via Cloudflare Worker
+     ======================================================== -->
+<style>
+  #lb-chat-btn{position:fixed;bottom:28px;right:28px;width:60px;height:60px;border-radius:50%;background:#003087;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(0,48,135,.4);display:flex;align-items:center;justify-content:center;z-index:9999;transition:transform .2s,box-shadow .2s;}
+  #lb-chat-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(0,48,135,.5);}
+  #lb-chat-btn svg{width:28px;height:28px;fill:#fff;}
+  #lb-chat-bubble{position:fixed;bottom:100px;right:28px;width:360px;max-height:520px;background:#fff;border-radius:18px;box-shadow:0 8px 48px rgba(0,0,0,.18);display:none;flex-direction:column;z-index:9999;overflow:hidden;font-family:"Nunito",sans-serif;}
+  #lb-chat-header{background:#003087;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;}
+  #lb-chat-header-left{display:flex;align-items:center;gap:10px;}
+  #lb-chat-avatar{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:"Playfair Display",serif;font-size:14px;font-weight:800;color:#fff;}
+  #lb-chat-title{font-size:14px;font-weight:800;color:#fff;line-height:1.2;}
+  #lb-chat-subtitle{font-size:11px;color:rgba(255,255,255,.7);}
+  #lb-chat-close{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.8);font-size:20px;line-height:1;padding:0;}
+  #lb-chat-close:hover{color:#fff;}
+  #lb-chat-capture{padding:20px;display:flex;flex-direction:column;gap:12px;background:#f5f7fc;}
+  #lb-chat-capture p{font-size:13px;color:#6b7a99;text-align:center;line-height:1.6;margin:0;}
+  #lb-chat-capture input{padding:10px 14px;border:1.5px solid #dde3f0;border-radius:8px;font-family:"Nunito",sans-serif;font-size:13px;color:#1a1f36;background:#fff;outline:none;}
+  #lb-chat-capture input:focus{border-color:#009FD4;box-shadow:0 0 0 3px rgba(0,159,212,.1);}
+  #lb-chat-start-btn{background:#CC0000;color:#fff;border:none;border-radius:8px;padding:11px;font-family:"Nunito",sans-serif;font-size:13px;font-weight:800;cursor:pointer;transition:background .2s;}
+  #lb-chat-start-btn:hover{background:#aa0000;}
+  #lb-chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:200px;max-height:300px;}
+  .lb-msg{max-width:82%;font-size:13px;line-height:1.6;padding:10px 14px;border-radius:14px;animation:lbfadein .25s ease;}
+  @keyframes lbfadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  .lb-msg.bot{background:#f0f4ff;color:#1a1f36;border-bottom-left-radius:4px;align-self:flex-start;}
+  .lb-msg.user{background:#003087;color:#fff;border-bottom-right-radius:4px;align-self:flex-end;}
+  .lb-msg.typing{background:#f0f4ff;color:#6b7a99;align-self:flex-start;font-style:italic;}
+  #lb-chat-input-row{display:flex;gap:8px;padding:12px 16px;border-top:1px solid #dde3f0;background:#fff;}
+  #lb-chat-input{flex:1;padding:9px 14px;border:1.5px solid #dde3f0;border-radius:8px;font-family:"Nunito",sans-serif;font-size:13px;color:#1a1f36;outline:none;resize:none;}
+  #lb-chat-input:focus{border-color:#009FD4;}
+  #lb-chat-send{background:#003087;color:#fff;border:none;border-radius:8px;padding:9px 14px;cursor:pointer;font-size:16px;transition:background .2s;flex-shrink:0;}
+  #lb-chat-send:hover{background:#001f5c;}
+  #lb-chat-disclaimer{font-size:10px;color:#aab4cc;text-align:center;padding:6px 16px 10px;background:#fff;}
+  @media(max-width:400px){#lb-chat-bubble{width:calc(100vw - 32px);right:16px;}#lb-chat-btn{right:16px;bottom:16px;}}
+</style>
+
+<!-- CHAT BUTTON -->
+<button id="lb-chat-btn" onclick="lbToggleChat()" title="Chat with us">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+</button>
+
+<!-- CHAT BUBBLE -->
+<div id="lb-chat-bubble">
+  <div id="lb-chat-header">
+    <div id="lb-chat-header-left">
+      <div id="lb-chat-avatar">L</div>
+      <div>
+        <div id="lb-chat-title">LaBerge Agency</div>
+        <div id="lb-chat-subtitle">Ask us anything about insurance</div>
+      </div>
+    </div>
+    <button id="lb-chat-close" onclick="lbToggleChat()">&#10005;</button>
+  </div>
+
+  <!-- INFO CAPTURE (shown first) -->
+  <div id="lb-chat-capture">
+    <p>Before we chat, tell us a little about yourself so we can personalize your experience.</p>
+    <input type="text" id="lb-visitor-name" placeholder="Your name" autocomplete="off">
+    <input type="email" id="lb-visitor-email" placeholder="Your email (optional)" autocomplete="off">
+    <button id="lb-chat-start-btn" onclick="lbStartChat()">Start Chatting &#8594;</button>
+  </div>
+
+  <!-- CHAT AREA (hidden until info captured) -->
+  <div id="lb-chat-area" style="display:none;flex-direction:column;flex:1;">
+    <div id="lb-chat-messages"></div>
+    <div id="lb-chat-input-row">
+      <textarea id="lb-chat-input" rows="1" placeholder="Type your question..."></textarea>
+      <button id="lb-chat-send" onclick="lbSendMessage()">&#10148;</button>
+    </div>
+    <div id="lb-chat-disclaimer">Powered by LaBerge Agency AI &middot; For emergencies call (253) 661-2000</div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var WORKER_URL = 'https://laberge-ai.labergeagency.workers.dev/';
+  var visitorName = '';
+  var chatHistory = [];
+  var isOpen = false;
+
+  var SYSTEM_PROMPT = "You are a friendly and knowledgeable insurance assistant for LaBerge Agency, a local Farmers Insurance office in Tacoma, Washington. Your role is to help potential clients understand their insurance options, answer questions about auto, home, life, and business insurance, and guide them toward getting a quote with the LaBerge Agency team. Always be warm, conversational, and concise — keep answers under 3 short paragraphs. Never give specific pricing, always encourage them to get a personalized quote. If someone asks about claims, direct them to call (253) 661-2000. If someone seems ready to get a quote, encourage them to fill out the form on this page. Always sign off mentions of the agency as 'LaBerge Agency' and never impersonate a specific agent. The office is at 2102 N Pearl St, Suite C108, Tacoma WA 98406, open Monday-Friday 9am-5pm. Phone: (253) 661-2000.";
+
+  window.lbToggleChat = function() {
+    isOpen = !isOpen;
+    var bubble = document.getElementById('lb-chat-bubble');
+    bubble.style.display = isOpen ? 'flex' : 'none';
+    if (isOpen) {
+      var nameInput = document.getElementById('lb-visitor-name');
+      if (nameInput) nameInput.focus();
+    }
+  };
+
+  window.lbStartChat = function() {
+    var nameVal = document.getElementById('lb-visitor-name').value.trim();
+    var emailVal = document.getElementById('lb-visitor-email').value.trim();
+    if (!nameVal) {
+      document.getElementById('lb-visitor-name').focus();
+      document.getElementById('lb-visitor-name').style.borderColor = '#CC0000';
+      return;
+    }
+    visitorName = nameVal;
+    document.getElementById('lb-chat-capture').style.display = 'none';
+    document.getElementById('lb-chat-area').style.display = 'flex';
+    lbAddMessage('bot', 'Hi ' + visitorName + '! I am the LaBerge Agency assistant. I can answer questions about auto, home, life, and business insurance. What can I help you with today?');
+    document.getElementById('lb-chat-input').focus();
+  };
+
+  window.lbSendMessage = function() {
+    var input = document.getElementById('lb-chat-input');
+    var text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    input.style.height = 'auto';
+    lbAddMessage('user', text);
+    chatHistory.push({ role: 'user', content: text });
+    lbShowTyping();
+    var messages = [{ role: 'system', content: SYSTEM_PROMPT }].concat(chatHistory);
+    fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: messages })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      lbRemoveTyping();
+      var reply = data.choices && data.choices[0] && data.choices[0].message
+        ? data.choices[0].message.content
+        : 'Sorry, I had trouble responding. Please call us at (253) 661-2000!';
+      chatHistory.push({ role: 'assistant', content: reply });
+      lbAddMessage('bot', reply);
+    })
+    .catch(function() {
+      lbRemoveTyping();
+      lbAddMessage('bot', 'I am having a little trouble right now. Please call us at (253) 661-2000 and we will be happy to help!');
+    });
+  };
+
+  function lbAddMessage(type, text) {
+    var msgs = document.getElementById('lb-chat-messages');
+    var div = document.createElement('div');
+    div.className = 'lb-msg ' + type;
+    div.textContent = text;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function lbShowTyping() {
+    var msgs = document.getElementById('lb-chat-messages');
+    var div = document.createElement('div');
+    div.className = 'lb-msg typing';
+    div.id = 'lb-typing';
+    div.textContent = 'Typing...';
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function lbRemoveTyping() {
+    var t = document.getElementById('lb-typing');
+    if (t) t.remove();
+  }
+
+  // Send on Enter (not Shift+Enter)
+  document.addEventListener('DOMContentLoaded', function() {
+    var input = document.getElementById('lb-chat-input');
+    if (input) {
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          lbSendMessage();
+        }
+      });
+      input.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = Math.min(this.scrollHeight, 80) + 'px';
+      });
+    }
+  });
+})();
+</script>
+<!-- END AI CHAT WIDGET -->
 </body>
 </html>
