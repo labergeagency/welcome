@@ -22,7 +22,7 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { font-family: "Nunito", sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+  body {font-size:18px; font-family: "Nunito", sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
 
   /* NAV */
   nav { background: var(--navy); padding: 0 40px; display: flex; align-items: center; justify-content: space-between; height: 68px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 16px rgba(0,0,0,0.18); }
@@ -69,7 +69,7 @@
   .dc-subtitle { font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
   .dc-title { font-family: "Playfair Display", serif; font-size: 1.3rem; font-weight: 800; color: var(--white); margin-bottom: 4px; }
   .dc-subtitle { font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-  .dc-body { padding: 24px 28px 28px; background: var(--white); border: 1px solid var(--border); border-top: none; border-radius: 0 0 20px 20px; }
+  .dc-body {font-size:18px; padding: 24px 28px 28px; background: var(--white); border: 1px solid var(--border); border-top: none; border-radius: 0 0 20px 20px; }
   .dc-tagline { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 12px; font-style: italic; }
   .dc-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
 
@@ -91,7 +91,7 @@
   .sop-step-num.red { background: var(--red); }
   .sop-step-num.green { background: var(--green); }
   .sop-step-num.blue { background: var(--navy); }
-  .sop-step-body { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .sop-step-body {font-size:18px;  color: var(--muted); line-height: 1.7; }
   .sop-step-body strong { color: var(--text); }
 
   /* SUMMARY TABLE */
@@ -546,5 +546,162 @@
   }, { threshold: 0.08 });
   document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
 </script>
+<!-- ========================================================
+     LABERGE AGENCY AI CHAT WIDGET
+     Powered by OpenAI via Cloudflare Worker
+     ======================================================== -->
+<style>
+  #lb-chat-btn{position:fixed;bottom:32px;right:32px;width:72px;height:72px;border-radius:50%;background:#003087;border:none;cursor:pointer;box-shadow:0 6px 28px rgba(0,48,135,.45);display:flex;align-items:center;justify-content:center;z-index:9999;transition:transform .2s;}
+  #lb-chat-btn:hover{transform:scale(1.08);}
+  #lb-chat-btn svg{width:34px;height:34px;fill:#fff;}
+  #lb-chat-bubble{position:fixed;bottom:120px;right:32px;width:440px;max-height:640px;background:#fff;border-radius:22px;box-shadow:0 12px 56px rgba(0,0,0,.22);display:none;flex-direction:column;z-index:9999;overflow:hidden;font-family:"Nunito","Helvetica Neue",Arial,sans-serif;font-size:17px;}
+  #lb-chat-header{background:#003087;padding:22px 26px;display:flex;align-items:center;justify-content:space-between;}
+  #lb-chat-header-left{display:flex;align-items:center;gap:14px;}
+  #lb-chat-avatar{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;color:#fff;}
+  #lb-chat-title{font-size:18px;font-weight:800;color:#fff;line-height:1.2;}
+  #lb-chat-subtitle{font-size:14px;color:rgba(255,255,255,.78);}
+  #lb-chat-close{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.85);font-size:24px;line-height:1;padding:0;}
+  #lb-chat-capture{padding:26px;display:flex;flex-direction:column;gap:16px;background:#f5f7fc;}
+  #lb-chat-capture p{font-size:17px;color:#6b7a99;text-align:center;line-height:1.65;margin:0;}
+  #lb-cap-name,#lb-cap-email{padding:14px 18px;border:2px solid #dde3f0;border-radius:10px;font-size:17px;color:#1a1f36;background:#fff;outline:none;width:100%;font-family:"Nunito","Helvetica Neue",Arial,sans-serif;}
+  #lb-cap-name:focus,#lb-cap-email:focus{border-color:#009FD4;}
+  #lb-chat-start-btn{background:#CC0000;color:#fff;border:none;border-radius:10px;padding:16px;font-size:17px;font-weight:800;cursor:pointer;width:100%;font-family:"Nunito","Helvetica Neue",Arial,sans-serif;}
+  #lb-chat-start-btn:hover{background:#aa0000;}
+  #lb-chat-messages{flex:1;overflow-y:auto;padding:22px;display:flex;flex-direction:column;gap:14px;min-height:260px;max-height:360px;}
+  .lb-msg{max-width:84%;font-size:16px;line-height:1.75;padding:14px 18px;border-radius:18px;}
+  .lb-msg.bot{background:#f0f4ff;color:#1a1f36;border-bottom-left-radius:4px;align-self:flex-start;}
+  .lb-msg.user{background:#003087;color:#fff;border-bottom-right-radius:4px;align-self:flex-end;}
+  .lb-msg.typing{background:#f0f4ff;color:#6b7a99;align-self:flex-start;font-style:italic;font-size:16px;}
+  #lb-chat-input-row{display:flex;gap:10px;padding:16px 20px;border-top:1px solid #dde3f0;background:#fff;}
+  #lb-chat-input{flex:1;padding:13px 18px;border:2px solid #dde3f0;border-radius:10px;font-size:16px;color:#1a1f36;outline:none;resize:none;font-family:"Nunito","Helvetica Neue",Arial,sans-serif;}
+  #lb-chat-input:focus{border-color:#009FD4;}
+  #lb-chat-send{background:#003087;color:#fff;border:none;border-radius:10px;padding:13px 18px;cursor:pointer;font-size:20px;flex-shrink:0;}
+  #lb-chat-send:hover{background:#001f5c;}
+  #lb-chat-disclaimer{font-size:13px;color:#aab4cc;text-align:center;padding:8px 16px 14px;background:#fff;}
+  #lb-chat-area{display:none;flex-direction:column;}
+  @media(max-width:480px){#lb-chat-bubble{width:calc(100vw - 24px);right:12px;bottom:100px;}#lb-chat-btn{right:16px;bottom:16px;}}
+</style>
+
+
+
+<button id="lb-chat-btn" title="Chat with LaBerge Agency">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+</button>
+
+<div id="lb-chat-bubble">
+  <div id="lb-chat-header">
+    <div id="lb-chat-header-left">
+      <div id="lb-chat-avatar">L</div>
+      <div>
+        <div id="lb-chat-title">LaBerge Agency</div>
+        <div id="lb-chat-subtitle">Ask us anything about insurance</div>
+      </div>
+    </div>
+    <button id="lb-chat-close">&#10005;</button>
+  </div>
+  <div id="lb-chat-capture">
+    <p>Before we chat, tell us a little about yourself.</p>
+    <input type="text" id="lb-cap-name" placeholder="Your name" />
+    <input type="email" id="lb-cap-email" placeholder="Your email (optional)" />
+    <button id="lb-chat-start-btn">Start Chatting &#8594;</button>
+  </div>
+  <div id="lb-chat-area">
+    <div id="lb-chat-messages"></div>
+    <div id="lb-chat-input-row">
+      <textarea id="lb-chat-input" rows="1" placeholder="Type your question..."></textarea>
+      <button id="lb-chat-send">&#10148;</button>
+    </div>
+    <div id="lb-chat-disclaimer">LaBerge Agency AI &middot; Emergencies: (253) 661-2000</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var WORKER = 'https://laberge-ai.labergeagency.workers.dev/';
+  var history = [];
+  var visitorName = '';
+  var SYSTEM = "You are a helpful insurance assistant for LaBerge Agency, a local Farmers Insurance office in Tacoma, Washington. Help visitors understand auto, home, life, and business insurance. Be warm, concise, and friendly. Keep answers under 3 short paragraphs. Never quote specific prices. For claims, direct them to call (253) 661-2000. Encourage visitors to fill out the quote form on this page. The office is at 2102 N Pearl St Suite C108 Tacoma WA 98406, open Mon-Fri 9am-5pm.";
+
+  function $(id){ return document.getElementById(id); }
+
+  function addMsg(type, text){
+    var d = document.createElement('div');
+    d.className = 'lb-msg ' + type;
+    d.textContent = text;
+    $('lb-chat-messages').appendChild(d);
+    $('lb-chat-messages').scrollTop = 99999;
+  }
+
+  function showTyping(){
+    var d = document.createElement('div');
+    d.className = 'lb-msg typing';
+    d.id = 'lb-typing';
+    d.textContent = 'Typing...';
+    $('lb-chat-messages').appendChild(d);
+    $('lb-chat-messages').scrollTop = 99999;
+  }
+
+  function removeTyping(){
+    var t = $('lb-typing');
+    if(t) t.parentNode.removeChild(t);
+  }
+
+  function sendMessage(){
+    var input = $('lb-chat-input');
+    var text = input.value.trim();
+    if(!text) return;
+    input.value = '';
+    addMsg('user', text);
+    history.push({ role:'user', content:text });
+    showTyping();
+    var messages = [{ role:'system', content:SYSTEM }].concat(history);
+    fetch(WORKER, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: messages })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      removeTyping();
+      var reply = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content)
+        ? data.choices[0].message.content
+        : 'Please call us at (253) 661-2000 and we will be glad to help!';
+      history.push({ role:'assistant', content:reply });
+      addMsg('bot', reply);
+    })
+    .catch(function(err){
+      removeTyping();
+      addMsg('bot', 'Please call us at (253) 661-2000 and we will be glad to help!');
+    });
+  }
+
+  $('lb-chat-btn').addEventListener('click', function(){
+    var b = $('lb-chat-bubble');
+    b.style.display = b.style.display === 'flex' ? 'none' : 'flex';
+    if(b.style.display === 'flex') $('lb-cap-name').focus();
+  });
+
+  $('lb-chat-close').addEventListener('click', function(){
+    $('lb-chat-bubble').style.display = 'none';
+  });
+
+  $('lb-chat-start-btn').addEventListener('click', function(){
+    var name = $('lb-cap-name').value.trim();
+    if(!name){ $('lb-cap-name').focus(); $('lb-cap-name').style.borderColor='#CC0000'; return; }
+    visitorName = name;
+    $('lb-chat-capture').style.display = 'none';
+    $('lb-chat-area').style.display = 'flex';
+    addMsg('bot', 'Hi ' + visitorName + '! I am the LaBerge Agency assistant. I can answer questions about auto, home, life, and business insurance. What can I help you with today?');
+    $('lb-chat-input').focus();
+  });
+
+  $('lb-chat-send').addEventListener('click', sendMessage);
+
+  $('lb-chat-input').addEventListener('keydown', function(e){
+    if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); sendMessage(); }
+  });
+})();
+</script>
+<!-- END AI CHAT WIDGET -->
 </body>
 </html>
