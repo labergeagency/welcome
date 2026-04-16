@@ -391,6 +391,13 @@
     <a href="tel:2536612000">Call Us</a>
   </div>
   <p>&copy; 2025 LaBerge Agency. All rights reserved.</p>
+
+  <div class="lb-lang-toggle">
+    <span>&#127760;</span>
+    <a href="javascript:void(0)" onclick="switchLang('en')" class="active">English</a>
+    <span>|</span>
+    <a href="javascript:void(0)" onclick="switchLang('es')">Espa&#241;ol</a>
+  </div>
 </footer>
 
 <script>
@@ -634,5 +641,66 @@
 })();
 </script>
 <!-- END AI CHAT WIDGET -->
+
+<style>
+  .lang-toggle a { cursor: pointer; }
+  .lang-toggle a.active { background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.5); }
+  /* Language toggle styling for pages that don't have it yet */
+  .lb-lang-toggle{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);}
+  .lb-lang-toggle a{font-family:"Nunito",sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.5);text-decoration:none;padding:5px 12px;border-radius:5px;border:1.5px solid rgba(255,255,255,.2);transition:all .2s;letter-spacing:.5px;cursor:pointer;}
+  .lb-lang-toggle a.active{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.5);}
+  .lb-lang-toggle a:hover{color:#fff;border-color:rgba(255,255,255,.5);}
+  .lb-lang-toggle span{color:rgba(255,255,255,.25);font-size:12px;}
+</style>
+<script>
+(function(){
+  var currentLang = 'en';
+  var pairs = [["Get In Touch","Contáctenos"],["We're Here For You","Estamos Aquí Para Usted"],["We're Here.","Estamos Aquí."],["Have a question about your policy? Need to make a change? We're just a call or email away.","¿Tiene alguna pregunta sobre su póliza? ¿Necesita hacer un cambio? Estamos a solo una llamada o correo electrónico."],["Want to talk before submitting a referral? Give us a call — we're always happy to chat.","¿Quiere hablar antes de enviar una referencia? Llámenos — siempre estamos felices de charlar."],["Contact Us","Contáctenos"],["Phone","Teléfono"],["Email","Correo Electrónico"],["Office Address","Dirección de la Oficina"],["Farmers Profile","Perfil de Farmers"],["Office Hours","Horario de Oficina"],["When We're In","Cuándo Estamos"],["Monday – Friday","Lunes – Viernes"],["Saturday","Sábado"],["By Appointment","Con Cita Previa"],["Sunday","Domingo"],["Closed","Cerrado"],["After Hours / Claims","Fuera de Horario / Reclamaciones"],["📍 Get Directions","📍 Obtener Direcciones"],["Get Directions","Obtener Direcciones"],["Email Us","Envíenos un Email"],["Call Us","Llámenos"],["Home","Inicio"],["© 2025 LaBerge Agency. All rights reserved.","© 2025 Agencia LaBerge. Todos los derechos reservados."],["Back to Home","Volver al Inicio"],["LaBerge Agency","Agencia LaBerge"],["Farmers Insurance · Tacoma, WA","Farmers Insurance · Tacoma, WA"],["Refer a Friend","Recomendar a un Amigo"],["Referral Program","Programa de Referidos"],["Know Someone Who Needs Insurance?","¿Conoce a Alguien que Necesita Seguro?"],["Help a friend, neighbor, or family member get the right coverage from a trusted local agent. It takes less than 2 minutes to refer someone — and it could save them a lot.","Ayude a un amigo, vecino o familiar a obtener la cobertura adecuada de un agente local de confianza. Se necesitan menos de 2 minutos para referir a alguien — ¡y podría ahorrarles mucho!"],["Refer Someone Now","Recomendar a Alguien Ahora"],["Takes under 2 minutes","Toma menos de 2 minutos"],["No obligation for them","Sin obligación para ellos"],["4.8 ★ rated agency","Agencia calificada con 4.8 ★"],["Local Tacoma team","Equipo local de Tacoma"],["Refer Someone to LaBerge Agency","Recomendar a Alguien a la Agencia LaBerge"],["Fill in the details of the person you'd like to refer.","Complete los datos de la persona que desea recomendar."],["Person You're Referring","Persona que Está Recomendando"],["Full Name","Nombre Completo"],["Phone Number","Número de Teléfono"],["Email Address","Correo Electrónico"],["Who's Referring","Quién Recomienda"],["Your Name","Su Nombre"],["Your Phone or Email","Su Teléfono o Correo"],["Submit Referral →","Enviar Referencia →"],["Their info is private.","Su información es privada."],["Referral Submitted!","¡Referencia Enviada!"],["Simple & Easy","Simple y Fácil"],["How the Referral Works","Cómo Funciona la Referencia"],["Three simple steps — and your friend or family member gets the protection they deserve.","Tres pasos simples — y su amigo o familiar obtiene la protección que merece."],["You Submit the Form","Usted Envía el Formulario"],["We Reach Out","Nos Ponemos en Contacto"],["They Get Covered","Obtienen Cobertura"],["Why It Matters","Por Qué Es Importante"],["Why Refer a Friend to LaBerge?","¿Por Qué Recomendar a un Amigo a LaBerge?"],["Local & Personal","Local y Personal"],["Trusted & Award-Winning","De Confianza y Galardonado"],["Best Value, Always","El Mejor Valor, Siempre"],["Know Someone Who Needs Coverage?","¿Conoce a Alguien que Necesita Cobertura?"],["It only takes 2 minutes.","Solo toma 2 minutos."],["Questions? We're Here.","¿Preguntas? Estamos Aquí."],["Refer Someone","Recomendar a Alguien"]];
+
+  function walkText(node, fromIdx, toIdx) {
+    if (node.nodeType === 3) {
+      var t = node.textContent;
+      for (var i = 0; i < pairs.length; i++) {
+        var from = pairs[i][fromIdx];
+        var to   = pairs[i][toIdx];
+        if (from && to && t.indexOf(from) !== -1) {
+          node.textContent = t.replace(from, to);
+          return;
+        }
+      }
+    } else if (node.nodeType === 1) {
+      var tag = node.tagName ? node.tagName.toLowerCase() : '';
+      if (tag === 'script' || tag === 'style' || tag === 'img' || tag === 'svg' || tag === 'input' || tag === 'textarea') return;
+      for (var c = 0; c < node.childNodes.length; c++) {
+        walkText(node.childNodes[c], fromIdx, toIdx);
+      }
+    }
+  }
+
+  window.switchLang = function(lang) {
+    if (lang === currentLang) return;
+    var fromIdx = currentLang === 'en' ? 0 : 1;
+    var toIdx   = lang === 'en' ? 0 : 1;
+    walkText(document.body, fromIdx, toIdx);
+    document.documentElement.lang = lang;
+    currentLang = lang;
+    document.querySelectorAll('.lang-toggle a, .lb-lang-toggle a').forEach(function(a) {
+      a.classList.remove('active');
+      var txt = a.textContent.trim();
+      if ((lang === 'en' && txt === 'English') || (lang === 'es' && (txt === 'Español' || txt === 'Español'))) {
+        a.classList.add('active');
+      }
+    });
+    try { localStorage.setItem('lb-lang', lang); } catch(e) {}
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    try {
+      var saved = localStorage.getItem('lb-lang');
+      if (saved === 'es') { setTimeout(function(){ window.switchLang('es'); }, 300); }
+    } catch(e) {}
+  });
+})();
+</script>
 </body>
 </html>
