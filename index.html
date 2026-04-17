@@ -187,6 +187,114 @@
   #lb-chat-btn{bottom:100px !important;}
   @media(max-width:768px){#lb-chat-btn{bottom:90px !important;}}
 </style>
+
+<style>
+/* ===== ENHANCED MOBILE/TABLET RESPONSIVENESS ===== */
+/* Tablets (600px - 900px) */
+@media(max-width:900px){
+  nav{padding:0 16px;height:60px;}
+  .nav-farmers-logo{height:36px;}
+  section{padding:48px 20px !important;}
+  .hero{padding:60px 20px 50px !important;min-height:unset !important;}
+  .hero h1{font-size:clamp(1.8rem,5vw,3rem) !important;}
+  .hero-cta-row{flex-direction:column;align-items:center;gap:10px;}
+  .hero-cta-row .btn,.hero-cta-row a.btn{width:100%;max-width:320px;justify-content:center;}
+  .hero-message{font-size:1rem !important;}
+  .welcome-grid{grid-template-columns:1fr !important;}
+  .welcome-item{border-right:none !important;border-bottom:1px solid var(--border);}
+  .team-grid{grid-template-columns:1fr !important;}
+  .team-card.featured{flex-direction:column !important;}
+  .team-card.featured .team-photo{width:100% !important;min-width:unset !important;height:260px !important;}
+  .contact-wrap{grid-template-columns:1fr !important;}
+  footer{flex-direction:column !important;text-align:center !important;padding:24px 16px !important;}
+  .footer-links{justify-content:center !important;}
+  .discount-cta-box{padding:28px 20px !important;}
+  /* Discounts page */
+  .discount-cards{grid-template-columns:1fr !important;}
+  .signal-steps{grid-template-columns:repeat(2,1fr) !important;}
+  .tracks-grid{grid-template-columns:repeat(2,1fr) !important;}
+  .signal-stats{grid-template-columns:1fr 1fr !important;}
+  .signal-hero{flex-direction:column !important;text-align:center !important;padding:28px 20px !important;}
+  /* Referral page */
+  .hero-inner{grid-template-columns:1fr !important;gap:32px !important;}
+  .steps-grid{grid-template-columns:1fr !important;}
+  .why-grid{grid-template-columns:1fr !important;}
+  .contact-wrap{grid-template-columns:1fr !important;}
+}
+
+/* Phones (max 600px) */
+@media(max-width:600px){
+  html{-webkit-text-size-adjust:100%;}
+  nav{padding:0 14px !important;height:56px !important;}
+  .nav-name{font-size:0.9rem !important;}
+  .nav-name span{font-size:9px !important;}
+  .nav-logo-ring{width:34px !important;height:34px !important;font-size:15px !important;}
+  .nav-farmers-logo{height:32px !important;}
+  section{padding:40px 16px !important;}
+  .hero{padding:48px 16px 40px !important;}
+  .hero h1{font-size:clamp(1.5rem,7vw,2.2rem) !important;line-height:1.15 !important;}
+  .hero-sub,.hero-sub{font-size:0.95rem !important;}
+  .hero-badge{font-size:11px !important;padding:5px 12px !important;}
+  .hero-message{font-size:0.95rem !important;}
+  .hero-cta-row{gap:8px !important;}
+  .hero-cta-row .btn,.hero-cta-row a.btn,.btn{font-size:13px !important;padding:11px 20px !important;}
+  .section-title{font-size:clamp(1.3rem,5.5vw,1.9rem) !important;}
+  .section-sub{font-size:0.95rem !important;}
+  .step{flex-direction:row;gap:14px;padding:20px 16px !important;}
+  .step-num{width:40px;height:40px;font-size:1rem;}
+  .step-body p,.step-body h3{font-size:0.95rem !important;}
+  .team-card.featured .team-photo{height:220px !important;}
+  .team-card.featured .team-info{padding:24px 16px !important;}
+  .team-card.featured .team-name{font-size:1.5rem !important;}
+  .team-info{padding:20px 16px !important;}
+  .team-name{font-size:1.1rem !important;}
+  .team-bio{font-size:13px !important;}
+  .contact-card{padding:24px 16px !important;}
+  .contact-item{gap:10px !important;}
+  .discount-cta-box{padding:24px 16px !important;}
+  .discount-cta-box h2{font-size:1.5rem !important;}
+  /* Reviews */
+  .reviews-grid,.review-cards{grid-template-columns:1fr !important;}
+  /* Farmers banner */
+  .farmers-banner-bottom{padding:20px 16px 32px !important;}
+  .farmers-carriers{gap:8px !important;}
+  .carrier-chip{font-size:12px !important;padding:5px 12px !important;}
+  /* Signal/Discounts page */
+  .signal-steps{grid-template-columns:1fr 1fr !important;}
+  .tracks-grid{grid-template-columns:1fr 1fr !important;}
+  .signal-stats{grid-template-columns:1fr !important;}
+  .stat-num{font-size:1.7rem !important;}
+  .sop-header{padding:16px 14px !important;}
+  .sop-steps{padding:14px 16px 20px !important;}
+  .sop-objective{padding:14px 16px !important;}
+  .sop-step-body{font-size:13px !important;}
+  .summary-table th,.summary-table td{padding:12px 12px !important;font-size:13px !important;}
+  .checklist-box{padding:20px 16px !important;}
+  /* Referral */
+  .hero-form-card{padding:24px 16px !important;}
+  .final-cta{padding:48px 16px !important;}
+  .final-cta h2{font-size:clamp(1.4rem,5.5vw,2rem) !important;}
+  footer p{font-size:12px !important;}
+  .footer-links{gap:12px !important;flex-wrap:wrap !important;}
+  .footer-links a{font-size:12px !important;}
+  /* Chat widget */
+  #lb-chat-bubble{width:calc(100vw - 20px) !important;right:10px !important;bottom:90px !important;}
+  #lb-chat-btn{right:14px !important;bottom:14px !important;width:60px !important;height:60px !important;}
+  #lb-chat-messages{min-height:280px !important;max-height:380px !important;}
+  /* Misc overflow fixes */
+  img{max-width:100%;height:auto;}
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .summary-table{font-size:13px !important;}
+}
+
+/* Very small phones */
+@media(max-width:380px){
+  .hero h1{font-size:1.4rem !important;}
+  .btn{font-size:12px !important;padding:10px 16px !important;}
+  .hero-cta-row .btn,.hero-cta-row a.btn{max-width:100% !important;}
+  .signal-steps,.tracks-grid{grid-template-columns:1fr !important;}
+}
+</style>
 </head>
 <body>
 
