@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Welcome | LaBerge Agency &mdash; Farmers Insurance</title>
+<title>LaBerge Agency &mdash; Farmers Insurance | Tacoma, WA</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzAwMzA4NyIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iNzIlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyMiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNmZmZmZmYiPkw8L3RleHQ+Cjwvc3ZnPg==">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -63,8 +63,8 @@
   .centered .section-sub{margin:0 auto}
   /* WELCOME STRIP */
   .welcome-strip{background:var(--white);border-top:4px solid var(--red)}
-  .welcome-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 4px 32px rgba(0,48,135,.08)}
-  .welcome-item{padding:36px 32px;text-align:center;border-right:1px solid var(--border);transition:background .2s}
+  .welcome-grid{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 4px 32px rgba(0,48,135,.08)}
+  .welcome-item{padding:40px 36px;text-align:center;border-right:1px solid var(--border);transition:background .2s}
   .welcome-item:last-child{border-right:none}
   .welcome-item:hover{background:var(--cream)}
   .wi-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 16px}
@@ -118,7 +118,7 @@
   .discount-cta-box p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:28px}
   /* CONTACT */
   .contact-section{background:var(--white)}
-  .contact-wrap{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+  .contact-wrap{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px}
   .contact-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:36px;box-shadow:0 4px 20px rgba(0,48,135,.06)}
   .contact-card.highlight{background:var(--navy);border-color:var(--navy)}
   .contact-item{display:flex;align-items:flex-start;gap:14px;margin-bottom:24px}
@@ -131,10 +131,10 @@
   .contact-card.highlight .contact-item-value{color:var(--white)}
   .contact-item-value a{color:var(--sky);text-decoration:none}
   .contact-item-value a:hover{text-decoration:underline}
-  .hours-grid{display:grid;gap:6px;margin-top:4px}
-  .hours-row{display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}
+  .hours-grid{display:grid;gap:8px;margin-top:4px}
+  .hours-row{display:grid;grid-template-columns:110px 1fr;gap:12px;font-size:14px;color:var(--muted)}
   .contact-card.highlight .hours-row{color:rgba(255,255,255,.65)}
-  .hours-row span:last-child{font-weight:700;color:var(--text)}
+  .hours-row span:last-child{font-weight:700;color:var(--text);text-align:right}
   .contact-card.highlight .hours-row span:last-child{color:var(--white)}
   /* FOOTER */
   footer{background:var(--navy-dark);padding:32px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
@@ -310,8 +310,8 @@
     <span></span><span></span><span></span>
   </button>
     <div class="nav-links">
-      <a href="#welcome">Welcome</a>
-      <a href="#next-steps">Next Steps</a>
+      <a href="#welcome">Overview</a>
+      <a href="#next-steps">Manage Policy</a>
       <a href="#team">Our Team</a>
       <a href="#contact">Contact</a>
       <a href="referral.html" style="color:#4caf50;font-weight:800;">&#128313; Refer a Friend</a>
@@ -321,8 +321,8 @@
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#welcome" onclick="toggleMenu()">Bienvenido / Welcome</a>
-  <a href="#next-steps" onclick="toggleMenu()">Próximos Pasos / Next Steps</a>
+  <a href="#welcome" onclick="toggleMenu()">Resumen / Overview</a>
+  <a href="#next-steps" onclick="toggleMenu()">Administrar Póliza / Manage Policy</a>
   <a href="#team" onclick="toggleMenu()">Nuestro Equipo / Our Team</a>
   <a href="#contact" onclick="toggleMenu()">Contacto / Contact</a>
   <a href="referral.html" style="color:#4caf50;font-weight:800;" onclick="toggleMenu()">&#128313; Recomendar / Refer a Friend</a>
@@ -340,14 +340,14 @@
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-inner-content">
-  <div class="hero-badge">Welcome to the Family</div>
-  <h1>You&#39;re Protected.<br><em>Welcome Aboard.</em></h1>
+  <div class="hero-badge">Tacoma&#39;s Local Farmers Agency</div>
+  <h1>Your Insurance.<br><em>Your Local Team.</em></h1>
   <p class="hero-sub">LaBerge Agency &mdash; Farmers Insurance &middot; Tacoma, Washington</p>
   <div class="hero-divider"></div>
-  <p class="hero-message">Thank you for choosing the LaBerge Agency. We&#39;re honored to be your trusted partner in protection. Your policy is more than a document &mdash; it&#39;s a promise that our team is here for you, every step of the way.</p>
+  <p class="hero-message">Whether you&#39;re just getting started with us or you&#39;ve been part of the LaBerge family for years, we&#39;re here to help &mdash; with your policy, your claims, and everything in between.</p>
   <div class="hero-cta-row">
-    <a href="#next-steps" class="btn btn-primary">&#128203; See Your Next Steps</a>
-    <a href="#team" class="btn btn-outline">&#128075; Meet Our Team</a>
+    <a href="#next-steps" class="btn btn-primary">&#128203; Manage My Policy</a>
+    <a href="tel:2536612000" class="btn btn-outline">&#128222; Call the Office</a>
     <a href="referral.html" class="btn btn-gold">&#128313; Refer a Friend</a>
     <a href="discounts.html" class="btn btn-gold">&#128176; Lower My Premium</a>
   </div>
@@ -376,9 +376,9 @@
 
 <section class="next-steps" id="next-steps">
   <div class="section-header centered fade-up">
-    <div class="section-label">What Happens Now</div>
-    <h2 class="section-title">Your Next Steps</h2>
-    <p class="section-sub">Here&#39;s everything you need to know now that you&#39;re covered.</p>
+    <div class="section-label">Manage Your Policy</div>
+    <h2 class="section-title">Whatever You Need, We&#39;ve Got You</h2>
+    <p class="section-sub">From day one to year ten, here&#39;s how to get the most out of your coverage with us.</p>
   </div>
   <div class="steps-wrap">
     <div class="step fade-up">
@@ -391,22 +391,22 @@
     <div class="step fade-up">
       <div class="step-num">2</div>
       <div class="step-body">
-        <h3>Review Your Policy Documents</h3>
-        <p>You&#39;ll receive your policy documents by mail or email shortly. Read through your declarations page &mdash; it summarizes your coverage, limits, and deductibles. Not sure what something means? Just call us.</p>
+        <h3>Manage Your Policy 24/7</h3>
+        <p>Access your ID cards, file a claim, make a payment, or review your declarations page anytime. Download the Farmers mobile app &mdash; search <strong>&ldquo;Farmers Insurance&rdquo;</strong> in the App Store or Google Play.</p>
       </div>
     </div>
     <div class="step fade-up">
       <div class="step-num">3</div>
       <div class="step-body">
-        <h3>Download the Farmers Mobile App</h3>
-        <p>Access your ID cards, file claims, make payments, and manage your policy 24/7. Search <strong>&ldquo;Farmers Insurance&rdquo;</strong> in the App Store or Google Play.</p>
+        <h3>Need to Make a Change?</h3>
+        <p>Moved, added a driver, bought a new car, or need to update your coverage? <a class="email-link" data-u="slaberge" data-d="farmersagent.com">Email us</a> or give us a call &mdash; we&#39;ll take care of it.</p>
       </div>
     </div>
     <div class="step fade-up">
       <div class="step-num">4</div>
       <div class="step-body">
         <h3>Schedule Your Annual Review</h3>
-        <p>Life changes &mdash; so should your coverage. <a class="email-link" data-u="slaberge" data-d="farmersagent.com">Email us</a> to schedule your annual review, or stop by our Tacoma office anytime.</p>
+        <p>Life changes &mdash; so should your coverage. Let&#39;s make sure you&#39;re still getting the best rate and the right protection. <a class="email-link" data-u="slaberge" data-d="farmersagent.com">Email us</a> to schedule your annual review, or stop by our Tacoma office anytime.</p>
       </div>
     </div>
   </div>
@@ -584,9 +584,9 @@
 
 <section class="contact-section" id="contact">
   <div class="section-header centered fade-up">
-    <div class="section-label">Get In Touch</div>
+    <div class="section-label">Get In Touch &amp; Stay Connected</div>
     <h2 class="section-title">We&#39;re Here For You</h2>
-    <p class="section-sub">Have a question about your policy? Need to make a change? We&#39;re just a call or email away.</p>
+    <p class="section-sub">Have a question about your policy? Need to make a change? We&#39;re just a call, email, or Facebook message away.</p>
   </div>
   <div class="contact-wrap fade-up">
     <div class="contact-card highlight">
@@ -646,61 +646,26 @@
         <a href="https://www.google.com/maps/search/2102+N+Pearl+St+Suite+C108+Tacoma+WA+98406" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;">&#128205; Get Directions</a>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- FACEBOOK PAGE SECTION -->
-<section style="background:var(--cream);padding:60px 40px;" id="social">
-  <div style="max-width:680px;margin:0 auto;text-align:center;">
-    <div class="section-header centered fade-up">
-      <div class="section-label">Stay Connected</div>
-      <h2 class="section-title">Follow Us on Facebook</h2>
-      <p class="section-sub">Get updates, tips, and community news from our office.</p>
-    </div>
-
-    <!-- Static Facebook Card -->
-    <div class="fade-up" style="margin-top:32px;background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.08);overflow:hidden;max-width:500px;margin-left:auto;margin-right:auto;">
-
-      <!-- Card Header (Facebook blue) -->
-      <div style="background:#1877F2;padding:28px 28px 20px;text-align:left;position:relative;">
-        <div style="display:flex;align-items:center;gap:14px;">
-          <div style="width:56px;height:56px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.15);">
-            <span style="font-size:28px;font-weight:900;color:#1877F2;font-family:'Playfair Display',serif;">L</span>
-          </div>
-          <div>
-            <div style="color:#fff;font-weight:700;font-size:1.05rem;line-height:1.2;">LaBerge Insurance Agency</div>
-            <div style="color:rgba(255,255,255,0.75);font-size:0.8rem;margin-top:2px;">Farmers Insurance · Tacoma, WA</div>
-          </div>
-          <!-- Facebook logo -->
-          <svg style="position:absolute;right:20px;top:20px;opacity:0.35;" width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971h-1.513c-1.491 0-1.956.93-1.956 1.886v2.264h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+    <div class="contact-card" style="display:flex;flex-direction:column;position:relative;overflow:hidden;background:linear-gradient(160deg,#eef5ff 0%,#e3edff 100%);border-color:#cfe0ff;">
+      <svg style="position:absolute;right:-18px;top:-18px;opacity:0.1;" width="140" height="140" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971h-1.513c-1.491 0-1.956.93-1.956 1.886v2.264h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+      <div class="section-label" style="position:relative;z-index:1;">Stay Connected</div>
+      <div class="contact-item" style="position:relative;z-index:1;">
+        <div class="contact-icon" style="background:#1877F2;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971h-1.513c-1.491 0-1.956.93-1.956 1.886v2.264h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </div>
+        <div>
+          <div class="contact-item-label">Facebook</div>
+          <div class="contact-item-value" style="color:#1877F2;">LaBerge Insurance Agency</div>
         </div>
       </div>
-
-      <!-- Card Body -->
-      <div style="padding:24px 28px;">
-        <p style="color:var(--navy-dark);font-size:0.95rem;line-height:1.6;margin:0 0 8px;text-align:left;">
-          📢 Stay up to date with insurance tips, local community news, office announcements, and more.
-        </p>
-        <p style="color:#666;font-size:0.85rem;margin:0;text-align:left;">
-          Join our community on Facebook and never miss an update from our team.
-        </p>
-      </div>
-
-      <!-- Card CTA -->
-      <div style="padding:0 28px 28px;display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="https://www.facebook.com/LaBergInsuranceAgency" target="_blank"
-          style="flex:1;background:#1877F2;color:#fff;text-decoration:none;padding:12px 20px;border-radius:8px;font-weight:700;font-size:0.9rem;text-align:center;transition:background .2s;"
-          onmouseover="this.style.background='#1464d8'" onmouseout="this.style.background='#1877F2'">
-          👍 Like Our Page
-        </a>
-        <a href="https://www.facebook.com/LaBergInsuranceAgency" target="_blank"
-          style="flex:1;background:#f0f2f5;color:#1877F2;text-decoration:none;padding:12px 20px;border-radius:8px;font-weight:700;font-size:0.9rem;text-align:center;transition:background .2s;border:2px solid #e4e6ea;"
-          onmouseover="this.style.background='#e4e6ea'" onmouseout="this.style.background='#f0f2f5'">
-          View Page →
-        </a>
+      <p style="font-size:13px;color:var(--muted);line-height:1.6;margin:4px 0 0;position:relative;z-index:1;">
+        &#128226; Insurance tips, local community news, and office announcements &mdash; join our community and never miss an update.
+      </p>
+      <div style="margin-top:auto;padding-top:24px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1;">
+        <a href="https://www.facebook.com/LaBergInsuranceAgency" target="_blank" class="btn btn-primary" style="flex:1;justify-content:center;background:#1877F2;border-color:#1877F2;">&#128077; Like Our Page</a>
+        <a href="https://www.facebook.com/LaBergInsuranceAgency" target="_blank" class="btn" style="flex:1;justify-content:center;background:#fff;color:#1877F2;border:2px solid #cfe0ff;">View Page &rarr;</a>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -968,22 +933,25 @@ function toggleMenu() {
 (function(){
   var currentLang = 'en';
   var pairs = [
-    ["Welcome to the Family","Bienvenido a la Familia"],
-    ["You're Protected.","Estás Protegido."],
-    ["Welcome Aboard.","Bienvenido a Bordo."],
-    ["Thank you for choosing the LaBerge Agency.","Gracias por elegir la Agencia LaBerge."],
-    ["See Your Next Steps","Ver Sus Próximos Pasos"],
+    ["Tacoma's Local Farmers Agency","Agencia Local de Farmers en Tacoma"],
+    ["Overview","Resumen"],
+    ["Manage Policy","Administrar Póliza"],
+    ["Your Insurance.","Su Seguro."],
+    ["Your Local Team.","Su Equipo Local."],
+    ["Whether you're just getting started with us or you've been part of the LaBerge family for years, we're here to help — with your policy, your claims, and everything in between.","Ya sea que recién esté comenzando con nosotros o haya sido parte de la familia LaBerge por años, estamos aquí para ayudarle — con su póliza, sus reclamaciones, y todo lo demás."],
+    ["Manage My Policy","Administrar Mi Póliza"],
+    ["Call the Office","Llamar a la Oficina"],
     ["Meet Our Team","Conozca Nuestro Equipo"],
     ["Local & Personal","Local y Personal"],
     ["We're your neighbors in Tacoma. Real people, real conversations — no call centers, no runaround.","Somos sus vecinos en Tacoma. Personas reales, conversaciones reales — sin centros de llamadas, sin rodeos."],
     ["Farmers Backed","Respaldado por Farmers"],
     ["Always Here for You","Siempre Aquí para Usted"],
-    ["What Happens Now","Qué Sucede Ahora"],
-    ["Your Next Steps","Sus Próximos Pasos"],
-    ["Here's everything you need to know now that you're covered.","Aquí tiene todo lo que necesita saber ahora que está cubierto."],
+    ["Whatever You Need, We've Got You","Lo Que Necesite, Lo Tenemos Cubierto"],
+    ["From day one to year ten, here's how to get the most out of your coverage with us.","Desde el primer día hasta el décimo año, así es como aprovechar al máximo su cobertura con nosotros."],
     ["Save Our Contact Info","Guarde Nuestra Información de Contacto"],
-    ["Review Your Policy Documents","Revise Sus Documentos de Póliza"],
-    ["Download the Farmers Mobile App","Descargue la Aplicación Móvil de Farmers"],
+    ["Manage Your Policy 24/7","Administre Su Póliza las 24 Horas"],
+    ["Manage Your Policy","Administre Su Póliza"],
+    ["Need to Make a Change?","¿Necesita Hacer un Cambio?"],
     ["Schedule Your Annual Review","Programe Su Revisión Anual"],
     ["The People Behind Your Policy","Las Personas Detrás de Su Póliza"],
     ["Agency Owner","Propietario de la Agencia"],
@@ -996,7 +964,7 @@ function toggleMenu() {
     ["See All Discounts →","Ver Todos los Descuentos →"],
     ["What Our Clients Say","Lo Que Dicen Nuestros Clientes"],
     ["Recent Reviews","Reseñas Recientes"],
-    ["Get In Touch","Contáctenos"],
+    ["Get In Touch & Stay Connected","Contáctenos y Síganos"],
     ["We're Here For You","Estamos Aquí Para Usted"],
     ["Contact Us","Contáctenos"],
     ["Phone","Teléfono"],
