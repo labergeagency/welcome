@@ -17,7 +17,7 @@
   html{scroll-behavior:smooth}
   body{font-size:16px;font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
   /* NAV */
-  nav{background:var(--navy);padding:0 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:68px;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.18)}
+  nav{background:var(--navy);padding:0 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:68px;position:sticky;top:52px;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.18)}
   .nav-brand{display:flex;align-items:center;gap:14px}
   .nav-logo-ring{width:40px;height:40px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;font-family:"Playfair Display",serif;font-weight:800;font-size:18px;color:var(--navy);flex-shrink:0}
   .nav-name{font-family:"Playfair Display",serif;font-size:1.1rem;font-weight:700;color:var(--white);line-height:1.1}
@@ -177,7 +177,7 @@
   }
   .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
   .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s;}
-  .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:var(--navy);z-index:999;padding:20px 24px;flex-direction:column;gap:0;box-shadow:0 8px 24px rgba(0,0,0,.3);}
+  .mobile-menu{display:none;position:fixed;top:120px;left:0;right:0;background:var(--navy);z-index:999;padding:20px 24px;flex-direction:column;gap:0;box-shadow:0 8px 24px rgba(0,0,0,.3);}
   .mobile-menu a{color:rgba(255,255,255,.85);font-size:16px;font-weight:600;text-decoration:none;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1);display:block;}
   .mobile-menu a:last-child{border-bottom:none;}
   .mobile-menu a.gold{color:var(--gold);}
@@ -199,6 +199,57 @@
   @media(max-width:768px){#lb-chat-btn{bottom:90px !important;}}
   @media(prefers-reduced-motion:reduce){
     .team-card.featured{animation:none !important;background-position:0% 0% !important;}
+  }
+
+  /* ANNOUNCEMENT BANNER */
+  .announcement-bar {
+    background: linear-gradient(90deg, var(--navy-dark) 0%, #1a3a6e 50%, var(--navy-dark) 100%);
+    border-bottom: 3px solid var(--gold);
+    overflow: hidden;
+    position: relative;
+    height: 52px;
+    display: flex;
+    align-items: center;
+  }
+  .announcement-bar::before,
+  .announcement-bar::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 60px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .announcement-bar::before { left: 0; background: linear-gradient(90deg, var(--navy-dark), transparent); }
+  .announcement-bar::after  { right: 0; background: linear-gradient(270deg, var(--navy-dark), transparent); }
+  .announcement-track {
+    display: flex;
+    white-space: nowrap;
+    animation: announcementScroll 38s linear infinite;
+    gap: 0;
+  }
+  .announcement-track:hover { animation-play-state: paused; }
+  .announcement-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 64px;
+    font-family: "Nunito", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.5px;
+  }
+  .announcement-item .ann-icon { font-size: 18px; flex-shrink: 0; }
+  .announcement-item .ann-sep { color: var(--gold); font-size: 18px; font-weight: 400; margin: 0 14px; opacity: 0.6; }
+  .announcement-item .ann-highlight { color: var(--gold); }
+  @keyframes announcementScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @media(max-width:600px) {
+    .announcement-bar { height: 44px; }
+    .announcement-item { font-size: 13px; padding: 0 40px; }
   }
 </style>
 
@@ -244,7 +295,8 @@
 /* Phones (max 600px) */
 @media(max-width:600px){
   html{-webkit-text-size-adjust:100%;}
-  nav{padding:0 14px !important;height:56px !important;}
+  nav{padding:0 14px !important;height:56px !important;top:44px !important;}
+  .mobile-menu{top:100px !important;}
   .nav-name{font-size:0.9rem !important;}
   .nav-name span{font-size:9px !important;}
   .nav-logo-ring{width:34px !important;height:34px !important;font-size:15px !important;}
@@ -316,6 +368,36 @@
 </style>
 </head>
 <body>
+
+<!-- ===== ANNOUNCEMENT BANNER ===== -->
+<div class="announcement-bar" role="marquee" aria-label="Office announcements">
+  <div class="announcement-track">
+    <!-- First copy -->
+    <span class="announcement-item">
+      <span class="ann-icon">&#127881;</span>
+      <span>Happy <span class="ann-highlight">4th of July</span> from all of us at LaBerge Agency!</span>
+      <span class="ann-sep">|</span>
+      <span class="ann-icon">&#128276;</span>
+      <span><span class="ann-highlight">Office Closed Friday, July 3</span> for Independence Day &mdash; We&#39;ll be back <span class="ann-highlight">Monday, July 6</span></span>
+      <span class="ann-sep">|</span>
+      <span class="ann-icon">&#128222;</span>
+      <span>For urgent matters, call Farmers 24/7 claims line: <span class="ann-highlight">1-800-435-7764</span></span>
+      <span class="ann-sep">|</span>
+    </span>
+    <!-- Duplicate for seamless loop -->
+    <span class="announcement-item">
+      <span class="ann-icon">&#127881;</span>
+      <span>Happy <span class="ann-highlight">4th of July</span> from all of us at LaBerge Agency!</span>
+      <span class="ann-sep">|</span>
+      <span class="ann-icon">&#128276;</span>
+      <span><span class="ann-highlight">Office Closed Friday, July 3</span> for Independence Day &mdash; We&#39;ll be back <span class="ann-highlight">Monday, July 6</span></span>
+      <span class="ann-sep">|</span>
+      <span class="ann-icon">&#128222;</span>
+      <span>For urgent matters, call Farmers 24/7 claims line: <span class="ann-highlight">1-800-435-7764</span></span>
+      <span class="ann-sep">|</span>
+    </span>
+  </div>
+</div>
 
 <nav>
   <div class="nav-brand">
