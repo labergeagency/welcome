@@ -17,7 +17,8 @@
   html{scroll-behavior:smooth}
   body{font-size:16px;font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
   /* NAV */
-  nav{background:var(--navy);padding:0 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:68px;position:sticky;top:52px;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.18)}
+  .sticky-header{position:sticky;top:0;z-index:200;}
+  nav{background:var(--navy);padding:0 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:68px;position:static;top:unset;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.18)}
   .nav-brand{display:flex;align-items:center;gap:14px}
   .nav-logo-ring{width:40px;height:40px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;font-family:"Playfair Display",serif;font-weight:800;font-size:18px;color:var(--navy);flex-shrink:0}
   .nav-name{font-family:"Playfair Display",serif;font-size:1.1rem;font-weight:700;color:var(--white);line-height:1.1}
@@ -295,7 +296,7 @@
 /* Phones (max 600px) */
 @media(max-width:600px){
   html{-webkit-text-size-adjust:100%;}
-  nav{padding:0 14px !important;height:56px !important;top:44px !important;}
+  nav{padding:0 14px !important;height:56px !important;}
   .mobile-menu{top:100px !important;}
   .nav-name{font-size:0.9rem !important;}
   .nav-name span{font-size:9px !important;}
@@ -369,6 +370,7 @@
 </head>
 <body>
 
+<div class="sticky-header">
 <!-- ===== ANNOUNCEMENT BANNER ===== -->
 <div class="announcement-bar" role="marquee" aria-label="Office announcements">
   <div class="announcement-track">
@@ -420,6 +422,7 @@
     </div>
   </div>
 </nav>
+</div><!-- end .sticky-header -->
 
 <div class="mobile-menu" id="mobile-menu">
   <a href="#welcome" onclick="toggleMenu()">Resumen / Overview</a>
