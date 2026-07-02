@@ -85,18 +85,27 @@
   .wi-text{font-size:17px;color:rgba(255,255,255,.95);line-height:1.8;text-shadow:0 1px 8px rgba(0,0,0,.45);max-width:380px;margin:0 auto;}
   .wi-text.dark{color:#1a1f36;text-shadow:none;}
   /* NEXT STEPS */
-  .next-steps{background:var(--cream)}
-  .steps-wrap{max-width:900px;margin:0 auto}
-  .step{display:flex;gap:24px;align-items:flex-start;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,48,135,.05);transition:all .2s}
-  .step:hover{transform:translateX(6px);box-shadow:0 4px 24px rgba(0,48,135,.1);border-color:var(--sky)}
-  .step-num{width:48px;height:48px;border-radius:12px;background:var(--navy);color:var(--white);font-family:"Playfair Display",serif;font-size:1.2rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .step:nth-child(2) .step-num{background:var(--sky)}
-  .step:nth-child(3) .step-num{background:var(--red)}
-  .step:nth-child(4) .step-num{background:var(--gold)}
-  .step-body h3{font-size:1.1rem;font-weight:800;color:var(--navy);margin-bottom:6px}
-  .step-body p{font-size:14px;color:var(--muted);line-height:1.6}
-  .step-body a{color:var(--sky);font-weight:600;text-decoration:none}
-  .step-body a:hover{text-decoration:underline}
+  .next-steps{background:#f0f4ff;padding:80px 40px;border-top:4px solid var(--red);}
+  .next-steps .section-label{color:var(--sky);}
+  .next-steps .section-title{color:var(--navy-dark);}
+  .next-steps .section-sub{color:var(--muted);}
+  .steps-wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .step{display:flex;flex-direction:column;gap:20px;background:var(--white);border:1px solid #dde6ff;border-radius:20px;padding:36px;box-shadow:0 4px 24px rgba(0,48,135,.07);transition:all .3s;position:relative;overflow:hidden;}
+  .step::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--navy),var(--sky));border-radius:20px 20px 0 0;}
+  .step:nth-child(2)::before{background:linear-gradient(90deg,var(--gold),#e8c96a);}
+  .step:nth-child(3)::before{background:linear-gradient(90deg,var(--red),#e84040);}
+  .step:nth-child(4)::before{background:linear-gradient(90deg,var(--sky),#00d4ff);}
+  .step:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,48,135,.13);border-color:#b8ccff;}
+  .step-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+  .step:nth-child(1) .step-icon{background:#e6f6fd;box-shadow:0 0 0 1px rgba(0,159,212,.2);}
+  .step:nth-child(2) .step-icon{background:#fdf8ec;box-shadow:0 0 0 1px rgba(201,168,76,.2);}
+  .step:nth-child(3) .step-icon{background:#fdf0f0;box-shadow:0 0 0 1px rgba(204,0,0,.15);}
+  .step:nth-child(4) .step-icon{background:#e8f0fe;box-shadow:0 0 0 1px rgba(0,48,135,.15);}
+  .step-num{display:none;}
+  .step-body h3{font-size:1.2rem;font-weight:800;color:var(--navy-dark);margin-bottom:8px;}
+  .step-body p{font-size:15px;color:var(--muted);line-height:1.7;}
+  .step-body a{color:var(--sky);font-weight:600;text-decoration:none;}
+  .step-body a:hover{text-decoration:underline;}
   /* TEAM */
   .team-section{background:var(--white)}
   .team-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
@@ -105,7 +114,7 @@
   }
   .team-card{border:1px solid var(--border);border-radius:18px;overflow:hidden;background:var(--white);box-shadow:0 4px 20px rgba(0,48,135,.06);transition:all .25s}
   .team-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,48,135,.13);border-color:var(--sky)}
-  .team-card.featured{grid-column:1/-1;display:flex;align-items:stretch;border:none;background:linear-gradient(110deg,#001233 0%,#012a5e 15%,#0a3d7a 24%,#1c5ba0 30%,#4a82c4 35%,#7aa8d8 38%,#3f6fa8 41%,#1a4a85 47%,#0d2f63 56%,#0a2452 70%,#001233 100%);background-size:230% 100%;background-position:0% 0%;animation:metallicShine 9s ease-in-out infinite;color:var(--white);box-shadow:0 8px 40px rgba(0,48,135,.25)}
+  .team-card.featured{grid-column:1/-1;display:flex;align-items:stretch;border:none;background:linear-gradient(110deg,#001233 0%,#012a5e 20%,#0d3668 36%,#1a4a85 50%,#2a5a90 58%,#1a4a85 66%,#0d2f63 80%,#001233 100%);background-size:200% 100%;background-position:0% 0%;animation:metallicShine 20s ease-in-out infinite;color:var(--white);box-shadow:0 8px 40px rgba(0,48,135,.25)}
   @keyframes metallicShine{
     0%   {background-position:0% 0%;}
     50%  {background-position:100% 0%;}
@@ -267,8 +276,7 @@
   .hero-cta-row .btn,.hero-cta-row a.btn,.btn{font-size:13px !important;padding:11px 20px !important;}
   .section-title{font-size:clamp(1.3rem,5.5vw,1.9rem) !important;}
   .section-sub{font-size:0.95rem !important;}
-  .step{flex-direction:row;gap:14px;padding:20px 16px !important;}
-  .step-num{width:40px;height:40px;font-size:1rem;}
+  .steps-wrap{grid-template-columns:1fr !important;}  .step{padding:24px 20px !important;}
   .step-body p,.step-body h3{font-size:0.95rem !important;}
   .team-card.featured .team-photo{height:220px !important;}
   .team-card.featured .team-info{padding:24px 16px !important;}
@@ -417,28 +425,28 @@
   </div>
   <div class="steps-wrap">
     <div class="step fade-up">
-      <div class="step-num">1</div>
+      <div class="step-icon">&#128222;</div>
       <div class="step-body">
         <h3>Save Our Contact Info</h3>
         <p>Add <strong>(253) 661-2000</strong> to your phone as &ldquo;LaBerge Agency.&rdquo; Email us anytime at <a class="email-link" data-u="slaberge" data-d="farmersagent.com">slaberge [at] farmersagent.com</a>.</p>
       </div>
     </div>
     <div class="step fade-up">
-      <div class="step-num">2</div>
+      <div class="step-icon">&#128241;</div>
       <div class="step-body">
         <h3>Manage Your Policy 24/7</h3>
         <p>Access your ID cards, file a claim, make a payment, or review your declarations page anytime. Download the Farmers mobile app &mdash; search <strong>&ldquo;Farmers Insurance&rdquo;</strong> in the App Store or Google Play.</p>
       </div>
     </div>
     <div class="step fade-up">
-      <div class="step-num">3</div>
+      <div class="step-icon">&#9999;&#65039;</div>
       <div class="step-body">
         <h3>Need to Make a Change?</h3>
         <p>Moved, added a driver, bought a new car, or need to update your coverage? <a class="email-link" data-u="slaberge" data-d="farmersagent.com">Email us</a> or give us a call &mdash; we&#39;ll take care of it.</p>
       </div>
     </div>
     <div class="step fade-up">
-      <div class="step-num">4</div>
+      <div class="step-icon">&#128197;</div>
       <div class="step-body">
         <h3>Schedule Your Annual Review</h3>
         <p>Life changes &mdash; so should your coverage. Let&#39;s make sure you&#39;re still getting the best rate and the right protection. <a class="email-link" data-u="slaberge" data-d="farmersagent.com">Email us</a> to schedule your annual review, or stop by our Tacoma office anytime.</p>
