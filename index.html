@@ -200,6 +200,7 @@
     .hamburger{display:flex;}
     .nav-links{display:none !important;}
     .nav-center{display:none;}
+    nav{grid-template-columns:1fr auto;}
   }
 
   /* Language toggle */
@@ -543,7 +544,7 @@
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:20px;" class="fade-up">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:20px;" class="reviews-grid fade-up">
 
       <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(0,48,135,.05);">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
