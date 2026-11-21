@@ -447,7 +447,6 @@ nav{grid-template-columns:auto 1fr}
   <a href="#contact" onclick="toggleMenu()">Contacto / Contact</a>
   <a href="#quote" class="gold" onclick="toggleMenu()">Cotización / Get a Quote</a>
   <a href="discounts.html" onclick="toggleMenu()">Reducir Prima / Lower My Premium</a>
-  <a href="referral.html" onclick="toggleMenu()">Recomendar / Refer a Friend</a>
 </div>
 
 <section class="hero" id="welcome">
@@ -475,7 +474,6 @@ nav{grid-template-columns:auto 1fr}
     </div>
     <div class="hero-links">
       <a href="discounts.html">Lower My Premium &rarr;</a>
-      <a href="referral.html">Refer a Friend &rarr;</a>
     </div>
     <div class="trust-row">
       <span class="trust-pill">Over 25 Years with Farmers</span>
@@ -801,7 +799,6 @@ nav{grid-template-columns:auto 1fr}
     <h2>&#128176; How Can I Lower My Premium?</h2>
     <p>Did you know you may qualify for multiple discounts? From bundling your policies to setting up autopay &mdash; every discount adds up. Click below to see all the ways you can save.</p>
     <a href="discounts.html" class="btn btn-gold" style="font-size:14px;padding:16px 36px;">See All Discounts &rarr;</a>
-    <p class="more-save">Love working with us? <a href="referral.html">Refer a friend &rarr;</a></p>
   </div>
 </div>
 
@@ -956,9 +953,9 @@ nav{grid-template-columns:auto 1fr}
 <script>
 (function(){
   var y=document.getElementById('yr'); if(y) y.textContent=new Date().getFullYear();
-  // Submissions are emailed automatically by FormSubmit.co to the address in this URL.
-  // (To use another service, e.g. Formspree, replace this URL. If left empty, the form falls back to opening the visitor's email app.)
-  var FORM_ENDPOINT='https://formsubmit.co/ajax/jayar.slaberge@farmersagency.com';
+  // Quote requests go to the agency's Make.com scenario, which emails the office.
+  var QUOTE_WEBHOOK='https://hook.us2.make.com/mvy7sj4jibvynerdfxxk4egntyd5ag1r';
+  var LEAD_PIPELINE='Website Quotes'; // must match the pipeline name used in your Make scenario / AgencyZoom
   document.querySelectorAll('.service-card').forEach(function(c){
     c.addEventListener('click',function(){var s=document.getElementById('qf-type');if(s)s.value=c.getAttribute('data-type');});
   });
@@ -970,20 +967,21 @@ nav{grid-template-columns:auto 1fr}
     var d=new FormData(f);
     if(d.get('website')) return;
     if(!d.get('name').trim()||!d.get('phone').trim()||!d.get('coverage')){msg('Please add your name, phone and what you need.','err');return;}
-    var lines=['Name: '+d.get('name'),'Phone: '+d.get('phone'),'Email: '+(d.get('email')||'-'),'Coverage: '+d.get('coverage'),'Contact by: '+d.get('contact_method'),'Best time: '+d.get('best_time'),'','Notes: '+(d.get('message')||'-')];
-    if(FORM_ENDPOINT){
-      msg('Sending...');
-      d.append('_subject','New quote request: '+d.get('coverage')+' - '+d.get('name'));
-      d.append('_template','table');
-      d.append('_captcha','false');
-      fetch(FORM_ENDPOINT,{method:'POST',body:d,headers:{'Accept':'application/json'}})
-        .then(function(r){if(!r.ok)throw 0;f.reset();msg('Thank you! We will contact you soon.','ok');})
-        .catch(function(){msg('Sorry, that did not send. Please call (253) 661-2000.','err');});
-    } else {
-      var to='jayar.slaberge'+'@'+'farmersagency.com';
-      window.location.href='mailto:'+to+'?subject='+encodeURIComponent('Quote request: '+d.get('coverage'))+'&body='+encodeURIComponent(lines.join('\n'));
-      msg('Opening your email app. If nothing opens, please call (253) 661-2000.','ok');
-    }
+    var digits=(d.get('phone')||'').replace(/\D/g,'');
+    if(digits.length===11&&digits.charAt(0)==='1') digits=digits.slice(1);
+    if(digits.length!==10){msg('Please enter a 10-digit phone number.','err');return;}
+    var phone='('+digits.slice(0,3)+') '+digits.slice(3,6)+'-'+digits.slice(6);
+    var payload={
+      lead_name:d.get('name').trim(), phone:phone, email:(d.get('email')||'').trim(),
+      pipeline:LEAD_PIPELINE, lead_source:'Website Quote Form',
+      coverage:d.get('coverage'), contact_method:d.get('contact_method'),
+      best_time:d.get('best_time'), message:(d.get('message')||'').trim()
+    };
+    var body=Object.keys(payload).map(function(k){return encodeURIComponent(k)+'='+encodeURIComponent(payload[k]);}).join('&');
+    var btn=f.querySelector('button[type=submit]'); btn.disabled=true; msg('Sending...');
+    fetch(QUOTE_WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
+      .then(function(){f.reset();btn.disabled=false;msg('Thank you! Our team will contact you within one business day.','ok');})
+      .catch(function(){btn.disabled=false;msg('Sorry, that did not send. Please call us at (253) 661-2000.','err');});
   });
 })();
 </script>
@@ -1195,12 +1193,11 @@ function toggleMenu() {
 <script>
 (function(){
   var currentLang = 'en';
-  var NEW_COUNT=77;
+  var NEW_COUNT=74;
   var pairs = [
     ["Get a Quote", "Obtener Cotización"],
     ["Services", "Servicios"],
     ["Lower My Premium →", "Reducir Mi Prima →"],
-    ["Refer a Friend →", "Recomendar a un Amigo →"],
     ["Over 25 Years with Farmers", "Más de 25 Años con Farmers"],
     ["4.8 Stars · 31 Reviews", "4.8 Estrellas · 31 Reseñas"],
     ["Local Tacoma Office", "Oficina Local en Tacoma"],
@@ -1258,8 +1255,6 @@ function toggleMenu() {
     ["Request My Free Quote", "Solicitar Mi Cotización Gratis"],
     ["Good to Know", "Es Bueno Saber"],
     ["Frequently Asked Questions", "Preguntas Frecuentes"],
-    ["Love working with us? ", "¿Le gusta trabajar con nosotros? "],
-    ["Refer a friend →", "Recomiende a un amigo →"],
     [" LaBerge Agency. All rights reserved.", " Agencia LaBerge. Todos los derechos reservados."],
     ["Call", "Llamar"],
     ["How do I get an insurance quote?", "¿Cómo obtengo una cotización?"],
