@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="LaBerge Insurance Agency is a local Farmers Insurance agent in Tacoma, WA. Get a quote for auto, home, renters, life, business and motorcycle insurance. Call (253) 661-2000.">
 <meta name="theme-color" content="#003087">
+<meta name="color-scheme" content="light">
 <link rel="canonical" href="https://labergeagency.github.io/welcome/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="LaBerge Insurance Agency">
@@ -416,6 +417,31 @@ nav{grid-template-columns:auto 1fr}
 @media(prefers-reduced-motion:reduce){.hero-slide{transition:none}.fade-up{transition:none}}
 </style>
 <noscript><style>.fade-up{opacity:1 !important;transform:none !important}</style></noscript>
+<style>
+/* ===== v2 DEVICE COMPATIBILITY ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
+img,svg,video,iframe{max-width:100%}
+.hero{min-height:100vh;min-height:100svh}
+@media(max-width:900px){.hero{min-height:auto!important;padding:56px 20px 48px!important}}
+.review-card-text,p{overflow-wrap:anywhere}
+.btn{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+input,select,textarea,button{font-family:inherit}
+select{-webkit-appearance:none;appearance:none;background-image:linear-gradient(45deg,transparent 50%,#6b7a99 50%),linear-gradient(135deg,#6b7a99 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:36px!important}
+.quote-form input,.quote-form select,.quote-form textarea{font-size:16px;min-height:46px}
+@media(max-width:600px){
+  .contact-card,.step,.quote-form{min-width:0}
+  .contact-item-value{overflow-wrap:anywhere}
+  .hours-row{grid-template-columns:1fr auto}
+  .team-card:not(.featured) .team-photo{aspect-ratio:4/3}
+  .team-card:not(.featured) .team-bio{font-size:13.5px!important}
+  .welcome-item{padding:40px 24px!important}
+  .faq-list details{padding:0 16px}
+  .map-wrap iframe{height:260px}
+  .farmers-carriers{padding:0 4px}
+}
+@media(max-width:380px){.btn{width:100%;justify-content:center}}
+@supports not (min-height:100svh){.hero{min-height:100vh}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#welcome">Skip to main content</a>
@@ -664,7 +690,7 @@ nav{grid-template-columns:auto 1fr}
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:20px;" class="fade-up">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:20px;" class="fade-up">
 
       <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(0,48,135,.05);">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
