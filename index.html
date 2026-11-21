@@ -956,9 +956,9 @@ nav{grid-template-columns:auto 1fr}
 <script>
 (function(){
   var y=document.getElementById('yr'); if(y) y.textContent=new Date().getFullYear();
-  // Optional: paste a form endpoint (e.g. Formspree https://formspree.io/f/xxxx or your Cloudflare Worker URL).
-  // If left empty, the form opens the visitor's email app with the details filled in.
-  var FORM_ENDPOINT='';
+  // Submissions are emailed automatically by FormSubmit.co to the address in this URL.
+  // (To use another service, e.g. Formspree, replace this URL. If left empty, the form falls back to opening the visitor's email app.)
+  var FORM_ENDPOINT='https://formsubmit.co/ajax/jayar.slaberge@farmersagency.com';
   document.querySelectorAll('.service-card').forEach(function(c){
     c.addEventListener('click',function(){var s=document.getElementById('qf-type');if(s)s.value=c.getAttribute('data-type');});
   });
@@ -973,6 +973,9 @@ nav{grid-template-columns:auto 1fr}
     var lines=['Name: '+d.get('name'),'Phone: '+d.get('phone'),'Email: '+(d.get('email')||'-'),'Coverage: '+d.get('coverage'),'Contact by: '+d.get('contact_method'),'Best time: '+d.get('best_time'),'','Notes: '+(d.get('message')||'-')];
     if(FORM_ENDPOINT){
       msg('Sending...');
+      d.append('_subject','New quote request: '+d.get('coverage')+' - '+d.get('name'));
+      d.append('_template','table');
+      d.append('_captcha','false');
       fetch(FORM_ENDPOINT,{method:'POST',body:d,headers:{'Accept':'application/json'}})
         .then(function(r){if(!r.ok)throw 0;f.reset();msg('Thank you! We will contact you soon.','ok');})
         .catch(function(){msg('Sorry, that did not send. Please call (253) 661-2000.','err');});
